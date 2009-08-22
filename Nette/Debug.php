@@ -343,6 +343,15 @@ final class Debug
 			$arr = (array) $var;
 			$s = "<span>object</span>(" . get_class($var) . ") (" . count($arr) . ") ";
 			$space = str_repeat($space1 = '   ', $level);
+			$properties = array();
+			if ($var instanceof IDebuggableProperties) {
+				foreach ((array) $var->getProperties() as $k => $v) {
+					if (!isset($arr[$k])) {
+						$properties[$k] = true;
+						$arr[$k] = $v;
+					}
+				}
+			}
 
 			static $list = array();
 			if (empty($arr)) {
@@ -356,7 +365,9 @@ final class Debug
 				$list[] = $var;
 				foreach ($arr as $k => &$v) {
 					$m = '';
-					if ($k[0] === "\x00") {
+					if (isset($properties[$k])) {
+						$m = ' <span>property</span>';
+					} elseif ($k[0] === "\x00") {
 						$m = $k[1] === '*' ? ' <span>protected</span>' : ' <span>private</span>';
 						$k = substr($k, strrpos($k, "\x00") + 1);
 					}

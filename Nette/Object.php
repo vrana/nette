@@ -25,6 +25,8 @@ require_once dirname(__FILE__) . '/exceptions.php';
 
 require_once dirname(__FILE__) . '/ObjectMixin.php';
 
+require_once dirname(__FILE__) . '/IDebuggable.php';
+
 
 
 /**
@@ -70,7 +72,7 @@ require_once dirname(__FILE__) . '/ObjectMixin.php';
  * @property-read string $class
  * @property-read \ReflectionObject $reflection
  */
-abstract class Object
+abstract class Object implements IDebuggableProperties
 {
 
 	/**
@@ -199,6 +201,21 @@ abstract class Object
 	public function __unset($name)
 	{
 		throw new /*\*/MemberAccessException("Cannot unset the property $this->class::\$$name.");
+	}
+
+
+
+	/********************* interface IDebuggableProperties ****************d*g**/
+
+
+
+	/**
+	 * Returns custom properties.
+	 * @return array
+	 */
+	public function getProperties()
+	{
+		return ObjectMixin::getProperties($this);
 	}
 
 }

@@ -38,3 +38,23 @@ interface IDebuggable
 	function getPanels();
 
 }
+
+
+
+/**
+ * Custom output for Nette\Debug.
+ *
+ * @author     Jakub Vrana
+ * @copyright  Copyright (c) 2004, 2009 David Grudl
+ * @package    Nette
+ */
+interface IDebuggableProperties
+{
+
+	/**
+	 * Returns custom properties.
+	 * @return array
+	 */
+	function getProperties();
+
+}

@@ -270,4 +270,31 @@ final class ObjectMixin
 		return isset(self::$methods[$class]['get' . $name]) || isset(self::$methods[$class]['is' . $name]);
 	}
 
+
+
+	/**
+	 * Returns custom properties.
+	 * @return array
+	 */
+	public static function getProperties($_this)
+	{
+		$class = get_class($_this);
+		if (!isset(self::$methods[$class])) {
+			self::$methods[$class] = array_flip(get_class_methods($class));
+		}
+
+		$return = array();
+		foreach (self::$methods[$class] as $key => $val) {
+			if (preg_match('~^(get|is)([A-Z_].*)~', $key, $match)) {
+				$name = $match[2];
+				$name[0] = strtolower($name[0]); // optional
+				$return[$name] = $match[1];
+				if (isset(self::$methods[$class]["set$match[2]"])) {
+					$return[$name] .= " set";
+				}
+			}
+		}
+		return $return;
+	}
+
 }

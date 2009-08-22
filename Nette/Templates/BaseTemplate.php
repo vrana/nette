@@ -429,4 +429,19 @@ abstract class BaseTemplate extends /*Nette\*/Object implements ITemplate
 		return $res . $php;
 	}
 
+
+
+	/********************* interface IDebuggableProperties ****************d*g**/
+
+
+
+	/**
+	 * Returns custom properties.
+	 * @return array
+	 */
+	public function getProperties()
+	{
+		return $this->params;
+	}
+
 }
