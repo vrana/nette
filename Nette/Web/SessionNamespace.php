@@ -251,4 +251,19 @@ final class SessionNamespace extends /*Nette\*/Object implements /*\*/IteratorAg
 		$this->meta = NULL;
 	}
 
+
+
+	/********************* interface IDebuggableProperties ****************d*g**/
+
+
+
+	/**
+	 * Returns custom properties.
+	 * @return array
+	 */
+	public function getProperties()
+	{
+		return $this->data;
+	}
+
 }

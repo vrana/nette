@@ -587,6 +587,21 @@ class Html extends /*Nette\*/Object implements /*\*/ArrayAccess, /*\*/Countable,
 		}
 	}
 
+
+
+	/********************* interface IDebuggableProperties ****************d*g**/
+
+
+
+	/**
+	 * Returns custom properties.
+	 * @return array
+	 */
+	public function getProperties()
+	{
+		return $this->attrs;
+	}
+
 }
 
 

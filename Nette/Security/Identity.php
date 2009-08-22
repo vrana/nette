@@ -157,4 +157,19 @@ class Identity extends /*Nette\*/FreezableObject implements IIdentity
 		}
 	}
 
+
+
+	/********************* interface IDebuggableProperties ****************d*g**/
+
+
+
+	/**
+	 * Returns custom properties.
+	 * @return array
+	 */
+	public function getProperties()
+	{
+		return array('name' => 'get set', 'roles' => 'get set') + $data;
+	}
+
 }
